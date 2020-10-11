@@ -1,0 +1,34 @@
+{
+	"name": "aframe-text-sprite",
+	"version": "3.0.0",
+	"description": "A wrapper for THREE.TextSprite.",
+	"keywords": [
+		"aframe",
+		"component",
+		"three"
+	],
+	"license": "MIT",
+	"author": "Sergej Sintschilin <seregpie@gmail.com>",
+	"files": [],
+	"main": "index.js",
+	"repository": "github:SeregPie/aframe-text-sprite",
+	"scripts": {
+		"build": "rollup -c",
+		"prepublishOnly": "npm run build"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.11.6",
+		"@babel/preset-env": "^7.11.5",
+		"@rollup/plugin-babel": "^5.2.1",
+		"@rollup/plugin-commonjs": "^15.1.0",
+		"@rollup/plugin-node-resolve": "^9.0.0",
+		"@seregpie/three.text-sprite": "^3.0.0",
+		"eslint": "^7.11.0",
+		"eslint-config-seregpie": "^1.0.1",
+		"rollup": "^2.29.0",
+		"rollup-plugin-terser": "^7.0.2"
+	},
+	"peerDependencies": {
+		"aframe": ">=0.8"
+	}
+}
