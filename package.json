@@ -22,7 +22,7 @@
 		"@rollup/plugin-babel": "^5.2.1",
 		"@rollup/plugin-commonjs": "^15.1.0",
 		"@rollup/plugin-node-resolve": "^9.0.0",
-		"@seregpie/three.text-sprite": "^3.0.0",
+		"@seregpie/three.text-sprite": "^3.1.0",
 		"eslint": "^7.11.0",
 		"eslint-config-seregpie": "^1.0.1",
 		"rollup": "^2.29.0",
