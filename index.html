@@ -13,7 +13,7 @@
 			}
 		</style>
 		<link
-			href="https://fonts.googleapis.com/css?family=Abril+Fatface|Annie+Use+Your+Telescope|Anton|Bahiana|Baloo+Bhaijaan|Barrio|Finger+Paint|Fredericka+the+Great|Gloria+Hallelujah|Indie+Flower|Life+Savers|Londrina+Sketch|Love+Ya+Like+A+Sister|Merienda|Nothing+You+Could+Do|Pacifico|Quicksand|Righteous|Roboto:100,300,400,500,700,900|Sacramento|Shadows+Into+Light"
+			href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
 			rel="stylesheet"
 		/>
 		<link
@@ -24,6 +24,10 @@
 			href="https://unpkg.com/vuetify@2/dist/vuetify.min.css"
 			rel="stylesheet"
 		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=Arizonia|Berkshire+Swash|Cookie|Great+Vibes|Just+Another+Hand|Leckerli+One|Lobster+Two|Merienda+One|Oleo+Script|Pacifico"
+			rel="stylesheet"
+		>
 		<script src="https://unpkg.com/core-js-bundle@3/minified.js"></script>
 		<script src="https://unpkg.com/aframe@1/dist/aframe.min.js"></script>
 		<script src="https://unpkg.com/aframe-orbit-controls@1/dist/aframe-orbit-controls.min.js"></script>
@@ -37,54 +41,11 @@
 			id="app"
 			v-cloak
 		>
-			<v-navigation-drawer
-				v-model="drawer"
-				app
-				clipped
-			>
-				<div class="pa-2">
-					<div
-						class="grey--text text--darken-1"
-					>text</div>
-					<v-btn
-						block
-						class="ma-0"
-						color="primary"
-						@click="randomizeText"
-					>randomize</v-btn>
-				</div>
-				<v-divider></v-divider>
-				<div class="pa-2">
-					<div
-					class="grey--text text--darken-1"
-					>font family</div>
-					<v-btn
-						block
-						class="ma-0"
-						color="primary"
-						@click="randomizeFontFamily"
-					>randomize</v-btn>
-				</div>
-				<v-divider></v-divider>
-				<div class="pa-2">
-					<div
-					class="grey--text text--darken-1"
-					>font size</div>
-					<v-btn
-						block
-						class="ma-0"
-						color="primary"
-						@click="randomizeFontSize"
-					>randomize</v-btn>
-				</div>
-			</v-navigation-drawer>
 			<v-app-bar
 				app
-				clipped-left
 				color="primary"
 				dark
 			>
-				<v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 				<v-toolbar-title>aframe-text-sprite</v-toolbar-title>
 				<v-spacer></v-spacer>
 				<v-btn
@@ -96,8 +57,25 @@
 				</v-btn>
 			</v-app-bar>
 			<v-main>
-				<my-scene :items="items"></my-scene>
+				<my-scene
+					v-bind="{
+						items,
+						sceneColor,
+					}"
+				></my-scene>
 			</v-main>
+			<v-btn
+				bottom
+				color="primary"
+				dark
+				fab
+				fixed
+				large
+				right
+				@click="randomize()"
+			>
+				<v-icon>mdi-reload</v-icon>
+			</v-btn>
 		</v-app>
 		<script src="./demo/script.js"></script>
 	</body>

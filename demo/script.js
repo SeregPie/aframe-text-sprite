@@ -1,6 +1,6 @@
 (function() {
 
-	let backgroundColor = '#140f2d';
+	Vue.config.ignoredElements = [/^a-/];
 
 	let colorValues = [
 		'#e574bc',
@@ -19,26 +19,16 @@
 	};
 
 	let fontFamilyValues = [
-		'Abril Fatface',
-		'Annie Use Your Telescope',
-		'Anton',
-		'Bahiana',
-		'Baloo Bhaijaan',
-		'Barrio',
-		'Finger Paint',
-		'Fredericka the Great',
-		'Gloria Hallelujah',
-		'Indie Flower',
-		'Life Savers',
-		'Londrina Sketch',
-		'Love Ya Like A Sister',
-		'Merienda',
-		'Nothing You Could Do',
+		'Arizonia',
+		'Berkshire Swash',
+		'Cookie',
+		'Great Vibes',
+		'Just Another Hand',
+		'Leckerli One',
+		'Lobster Two',
+		'Merienda One',
+		'Oleo Script',
 		'Pacifico',
-		'Quicksand',
-		'Righteous',
-		'Sacramento',
-		'Shadows Into Light',
 	];
 	let genFontFamily = function() {
 		return chance.pickone(fontFamilyValues);
@@ -58,14 +48,10 @@
 		);
 	};
 
-	let minFontSize = 1;
-	let maxFontSize = 8;
 	let genFontSize = function() {
-		return chance.floating({min: minFontSize, max: maxFontSize});
+		return chance.floating({min: 1/8, max: 1/2});
 	};
 
-	let minDistance = 64;
-	let maxDistance = 256;
 	let genItemPosition = function() {
 		return ((new THREE.Vector3(
 			chance.floating({min: -1, max: +1}),
@@ -73,14 +59,13 @@
 			chance.floating({min: -1, max: +1}),
 		))
 			.normalize()
-			.multiplyScalar(chance.floating({min: minDistance, max: maxDistance}))
+			.multiplyScalar(chance.floating({min: 8, max: 16}))
 			.toArray()
 		);
 	};
 
-	let itemsCount = 128;
 	let genItems = function() {
-		return Array.from({length: itemsCount}, () => {
+		return Array.from({length: 128}, () => {
 			return {
 				color: genColor(),
 				fontFamily: genFontFamily(),
@@ -96,40 +81,42 @@
 		vuetify: new Vuetify(),
 		data() {
 			return {
-				drawer: true,
 				items: genItems(),
+				sceneColor: '#140f2d',
 			};
 		},
 		methods: {
-			randomizeFontFamily() {
+			randomize() {
 				this.items.forEach(item => {
-					item.fontFamily = genFontFamily();
-				});
-			},
-			randomizeFontSize() {
-				this.items.forEach(item => {
-					item.fontSize = genFontSize();
-				});
-			},
-			randomizeText() {
-				this.items.forEach(item => {
-					item.text = genText();
+					Object.assign(item, {
+						color: genColor(),
+						fontFamily: genFontFamily(),
+						fontSize: genFontSize(),
+						position: genItemPosition(),
+						text: genText(),
+					});
 				});
 			},
 		},
 		components: {
 			myScene: {
-				props: ['items'],
+				props: [
+					'items',
+					'sceneColor',
+				],
 				render(h) {
-					let {items} = this;
+					let {
+						items,
+						sceneColor,
+					} = this;
 					return h(
 						'a-scene',
 						{
 							attrs: {
 								'background': AFRAME.utils.styleParser.stringify({
-									color: backgroundColor,
+									color: sceneColor,
 								}),
-								'embedded': '',
+								'embedded': true,
 								'vr-mode-ui': AFRAME.utils.styleParser.stringify({
 									enabled: false,
 								}),
@@ -146,12 +133,12 @@
 										'orbit-controls': AFRAME.utils.styleParser.stringify({
 											dampingFactor: 1/16,
 											enableKeys: false,
-											initialPosition: (([x, y, z]) => AFRAME.utils.coordinates.stringify({x, y, z}))([0, 0, maxDistance * 2]),
-											maxDistance: maxDistance * 4,
-											minDistance: minDistance / 4,
+											initialPosition: (([x, y, z]) => AFRAME.utils.coordinates.stringify({x, y, z}))([0, 0, 32]),
+											maxDistance: 128,
+											minDistance: 2,
 											panSpeed: 1,
 											rotateSpeed: 1/6,
-											zoomSpeed: 1,
+											zoomSpeed: 1/2,
 										}),
 										'look-controls': AFRAME.utils.styleParser.stringify({
 											enabled: false,
