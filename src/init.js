@@ -9,6 +9,7 @@ export default function() {
 	} = this;
 	let {
 		alignment,
+		backgroundColor,
 		color,
 		fontFamily,
 		fontSize,
@@ -23,6 +24,7 @@ export default function() {
 	} = data;
 	let object = new TextSprite({
 		alignment,
+		backgroundColor,
 		color,
 		fontFamily,
 		fontSize,

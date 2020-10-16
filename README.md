@@ -33,6 +33,7 @@ import AFRAME from 'aframe';
 | property | type | default |
 | ---: | :--- | :--- |
 | `alignment` | `'string'` | `'center'` |
+| `backgroundColor` | `'color'` | `'rgba(0,0,0,0)'` |
 | `color` | `'color'` | `'#fff'` |
 | `fog` | `'boolean'` | `false` |
 | `fontFamily` | `'string'` | `'sans-serif'` |

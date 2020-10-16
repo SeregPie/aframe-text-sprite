@@ -7,6 +7,7 @@ export default function(oldData) {
 	} = this;
 	let {
 		alignment,
+		backgroundColor,
 		color,
 		fog,
 		fontFamily,
@@ -26,6 +27,7 @@ export default function(oldData) {
 	if (Object.keys(oldData).length) {
 		Object.assign(object, {
 			alignment,
+			backgroundColor,
 			color,
 			fontFamily,
 			fontSize,

@@ -1,5 +1,6 @@
 export default {
 	alignment: {type: 'string', default: 'center'},
+	backgroundColor: {type: 'color', default: 'rgba(0,0,0,0)'},
 	color: {type: 'color', default: '#fff'},
 	fog: {type: 'boolean', default: false},
 	fontFamily: {type: 'string', default: 'sans-serif'},
