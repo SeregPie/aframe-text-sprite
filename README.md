@@ -33,8 +33,8 @@ import 'aframe-text-sprite';
 | name | type | default |
 | ---: | :--- | :--- |
 | `alignment` | `'string'` | `'center'` |
-| `backgroundColor` | `'color'` | `'rgba(0,0,0,0)'` |
-| `color` | `'color'` | `'#fff'` |
+| `backgroundColor` | `'string'` | `'rgba(0,0,0,0)'` |
+| `color` | `'string'` | `'#fff'` |
 | `fog` | `'boolean'` | `false` |
 | `fontFamily` | `'string'` | `'sans-serif'` |
 | `fontSize` | `'number'` | `1` |
@@ -44,7 +44,7 @@ import 'aframe-text-sprite';
 | `lineGap` | `'number'` | `0.25` |
 | `opacity` | `'number'` | `1` |
 | `padding` | `'number'` | `0.5` |
-| `strokeColor` | `'color'` | `'#fff'` |
+| `strokeColor` | `'string'` | `'#fff'` |
 | `strokeWidth` | `'number'` | `0` |
 | `text` | `'string'` | `''` |
 | `transparent` | `'boolean'` | `true` |
