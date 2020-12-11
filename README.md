@@ -17,8 +17,8 @@ npm i aframe-text-sprite
 ---
 
 ```javascript
-import 'aframe-text-sprite';
 import AFRAME from 'aframe';
+import 'aframe-text-sprite';
 ```
 
 ### browser
