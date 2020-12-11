@@ -30,7 +30,7 @@ import AFRAME from 'aframe';
 
 ## properties
 
-| property | type | default |
+| name | type | default |
 | ---: | :--- | :--- |
 | `alignment` | `'string'` | `'center'` |
 | `backgroundColor` | `'color'` | `'rgba(0,0,0,0)'` |
