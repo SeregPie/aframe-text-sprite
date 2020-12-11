@@ -77,7 +77,7 @@
 	};
 
 	new Vue({
-		el: '#app',
+		el: '#App',
 		vuetify: new Vuetify(),
 		data() {
 			return {
@@ -144,7 +144,7 @@
 											enabled: false,
 										}),
 									},
-									key: 'pkztceqjwmzw',
+									key: JSON.stringify(0),
 								},
 							),
 							...items.map((item, i) => {
@@ -160,7 +160,7 @@
 												text: item.text,
 											}),
 										},
-										key: JSON.stringify(['pjuqezmebnjt', i]),
+										key: JSON.stringify([1, i]),
 									},
 								);
 							}),
