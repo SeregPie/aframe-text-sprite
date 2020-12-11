@@ -37,5 +37,12 @@ export default function() {
 		strokeWidth,
 		text,
 	});
+	{
+		let s = object.raycast;
+		object.raycast = ((raycaster, ...args) => {
+			raycaster.camera ??= el.sceneEl.camera;
+			return s.call(object, raycaster, ...args);
+		});
+	}
 	el.setObject3D(name, object);
 }
