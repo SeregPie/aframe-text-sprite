@@ -24,27 +24,29 @@ export default function(oldData) {
 		transparent,
 	} = data;
 	let object = el.getObject3D(name);
-	if (Object.keys(oldData).length) {
-		Object.assign(object, {
-			alignment,
-			backgroundColor,
-			color,
-			fontFamily,
-			fontSize,
-			fontStyle,
-			fontVariant,
-			fontWeight,
-			lineGap,
-			padding,
-			strokeColor,
-			strokeWidth,
-			text,
+	if (object) {
+		if (Object.keys(oldData).length) {
+			Object.assign(object, {
+				alignment,
+				backgroundColor,
+				color,
+				fontFamily,
+				fontSize,
+				fontStyle,
+				fontVariant,
+				fontWeight,
+				lineGap,
+				padding,
+				strokeColor,
+				strokeWidth,
+				text,
+			});
+		}
+		let {material} = object;
+		Object.assign(material, {
+			fog,
+			opacity,
+			transparent,
 		});
 	}
-	let {material} = object;
-	Object.assign(material, {
-		fog,
-		opacity,
-		transparent,
-	});
 }
