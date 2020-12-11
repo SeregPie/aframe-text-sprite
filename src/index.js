@@ -1,6 +1,3 @@
-import THREE from 'three';
-THREE.MathUtils = THREE.MathUtils || THREE.Math;
-
 import AFRAME from 'aframe';
 
 import init from './init';
