@@ -2,6 +2,9 @@
 
 	Vue.config.ignoredElements = [/^a-/];
 
+	let d = 1;
+	let itemsCount = 128;
+	let sceneColor = '#140f2d';
 	let colorValues = [
 		'#e574bc',
 		'#ea84c9',
@@ -14,10 +17,6 @@
 		'#96d7ff',
 		'#7fdeff',
 	];
-	let genColor = function() {
-		return chance.pickone(colorValues);
-	};
-
 	let fontFamilyValues = [
 		'Arizonia',
 		'Berkshire Swash',
@@ -30,11 +29,16 @@
 		'Oleo Script',
 		'Pacifico',
 	];
-	let genFontFamily = function() {
-		return chance.pickone(fontFamilyValues);
-	};
 
-	let genText = function() {
+	function genColor() {
+		return chance.pickone(colorValues);
+	}
+
+	function genFontFamily() {
+		return chance.pickone(fontFamilyValues);
+	}
+
+	function genText() {
 		return (Array
 			.from({length: chance.weighted([1, 2, 3], [2, 3, 1])})
 			.map(() => {
@@ -46,26 +50,26 @@
 			})
 			.join('\n')
 		);
-	};
+	}
 
-	let genFontSize = function() {
-		return chance.floating({min: 1/8, max: 1/2});
-	};
+	function genFontSize() {
+		return chance.floating({min: d / 128, max: d / 32});
+	}
 
-	let genItemPosition = function() {
+	function genItemPosition() {
 		return ((new THREE.Vector3(
 			chance.floating({min: -1, max: +1}),
 			chance.floating({min: -1, max: +1}),
 			chance.floating({min: -1, max: +1}),
 		))
 			.normalize()
-			.multiplyScalar(chance.floating({min: 8, max: 16}))
+			.multiplyScalar(chance.floating({min: d / 2, max: d}))
 			.toArray()
 		);
-	};
+	}
 
-	let genItems = function() {
-		return Array.from({length: 128}, () => {
+	function genItems() {
+		return Array.from({length: itemsCount}, () => {
 			return {
 				color: genColor(),
 				fontFamily: genFontFamily(),
@@ -74,7 +78,7 @@
 				text: genText(),
 			};
 		});
-	};
+	}
 
 	new Vue({
 		el: '#App',
@@ -82,12 +86,12 @@
 		data() {
 			return {
 				items: genItems(),
-				sceneColor: '#140f2d',
 			};
 		},
 		methods: {
 			randomize() {
-				this.items.forEach(item => {
+				let {items} = this;
+				items.forEach(item => {
 					Object.assign(item, {
 						color: genColor(),
 						fontFamily: genFontFamily(),
@@ -99,16 +103,12 @@
 			},
 		},
 		components: {
-			myScene: {
+			MyScene: {
 				props: [
 					'items',
-					'sceneColor',
 				],
 				render(h) {
-					let {
-						items,
-						sceneColor,
-					} = this;
+					let {items} = this;
 					return h(
 						'a-scene',
 						{
@@ -133,9 +133,9 @@
 										'orbit-controls': AFRAME.utils.styleParser.stringify({
 											dampingFactor: 1/16,
 											enableKeys: false,
-											initialPosition: (([x, y, z]) => AFRAME.utils.coordinates.stringify({x, y, z}))([0, 0, 32]),
-											maxDistance: 128,
-											minDistance: 2,
+											initialPosition: (([x, y, z]) => AFRAME.utils.coordinates.stringify({x, y, z}))([0, 0, d * 2]),
+											maxDistance: d * 8,
+											minDistance: d / 8,
 											panSpeed: 1,
 											rotateSpeed: 1/6,
 											zoomSpeed: 1/2,
@@ -144,26 +144,34 @@
 											enabled: false,
 										}),
 									},
-									key: JSON.stringify(0),
 								},
 							),
-							...items.map((item, i) => {
-								return h(
-									'a-entity',
-									{
-										attrs: {
-											'position': (([x, y, z]) => AFRAME.utils.coordinates.stringify({x, y, z}))(item.position),
-											'text-sprite': AFRAME.utils.styleParser.stringify({
-												color: item.color,
-												fontFamily: item.fontFamily,
-												fontSize: item.fontSize,
-												text: item.text,
-											}),
+							h(
+								'a-entity',
+								items.map(({
+									color,
+									fontFamily,
+									fontSize,
+									position,
+									text,
+								}, i) => {
+									return h(
+										'a-entity',
+										{
+											attrs: {
+												'position': (([x, y, z]) => AFRAME.utils.coordinates.stringify({x, y, z}))(position),
+												'text-sprite': AFRAME.utils.styleParser.stringify({
+													color,
+													fontFamily,
+													fontSize,
+													text,
+												}),
+											},
+											key: i,
 										},
-										key: JSON.stringify([1, i]),
-									},
-								);
-							}),
+									);
+								}),
+							),
 						],
 					);
 				},
