@@ -1,4 +1,4 @@
-import TextSprite from '@seregpie/three.text-sprite';
+import TextSprite from './TextSprite';
 
 import name from './name';
 
